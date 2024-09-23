@@ -15,7 +15,7 @@ namespace ADO.NET.Test
         public SqlConnectionTests()
         {
             // Configure sua string de conexão aqui
-            string connectionString = "Server=DESKTOP-R7HBS56\\SQLEXPRESS;Database=testedb;User Id=sa;Password=123456;Encrypt=False";
+            string connectionString = "";
             _connectionFactory = new SqlConnectionFactory(connectionString);
             _transactionFactory = new TransactionManager(_connectionFactory);
         }

@@ -14,10 +14,15 @@ namespace ADO.NET.Transaction
             _connectionFactory = connectionFactory;
         }
 
+        public DbConnection Connection => _connection ?? _connectionFactory.CreateConnection();
+
         public void BeginTransaction()
         {
-            _connection = _connectionFactory.CreateConnection();
-            _connection.Open();
+            if (_connection == null)
+            {
+                _connection = _connectionFactory.CreateConnection();
+                _connection.Open();
+            }
             _transaction = _connection.BeginTransaction();
         }
 
@@ -25,20 +30,25 @@ namespace ADO.NET.Transaction
         {
             _transaction?.Commit();
             _connection?.Close();
+            _connection = null;
+            _transaction = null;
         }
 
         public void Rollback()
         {
             _transaction?.Rollback();
             _connection?.Close();
+            _connection = null;
+            _transaction = null;
         }
 
         public DbCommand CreateCommand()
         {
-            DbCommand command = _connection.CreateCommand();
+            DbCommand command = Connection.CreateCommand();
             command.Transaction = _transaction;
             return command;
         }
-    }
 
+        public bool IsInTransaction => _transaction != null;
+    }
 }
