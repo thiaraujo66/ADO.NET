@@ -1,4 +1,4 @@
-# ADO.NET Multi-Database Data Service
+# ADO.NET
 
 Este projeto é uma biblioteca em .NET que fornece uma abstração para operações básicas de banco de dados usando ADO.NET. Ele é projetado para ser utilizado com múltiplos bancos de dados relacionais (SQL Server, MySQL, PostgreSQL, Oracle, etc.) e permite gerenciar transações de forma simples e direta.
 
